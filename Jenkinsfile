@@ -5,7 +5,6 @@ pipeline{
 
     // }
     // parameters{
-
     // }
     options{
         timestamps()
