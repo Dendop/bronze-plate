@@ -1,32 +1,29 @@
-pipeline{
+pipeline {
     agent any
-    // environment{
-    // }
-    // parameters{
-    // }
-    options{
+
+    options {
         timestamps()
         timeout(time: 5, unit: 'MINUTES')
     }
-    stages{
-        stage('make directory'){
-            options{
-                retry(2)
-            }
-            steps{
-                sh "mkdir  ~/jenkins-pipeline-example || true"
-                sh "cd jenkins-pipeline-example"
-                sh "echo 'Hello World' > exampleFile.txt || true"
+
+    stages {
+
+        stage('Prepare folder') {
+            steps {
+                sh 'mkdir -p jenkins-pipeline-example'
+                sh 'echo "Hello World" > jenkins-pipeline-example/exampleFile.txt'
             }
         }
-        stage('adding a new file'){
-            steps{
-                sh "touch ~/jenkins-pipeline-example/newFile.txt || true"
+
+        stage('Add file') {
+            steps {
+                sh 'touch jenkins-pipeline-example/newFile.txt'
             }
         }
     }
-    post{
-        always{
+
+    post {
+        always {
             archiveArtifacts artifacts: 'jenkins-pipeline-example/*', allowEmptyArchive: true
         }
     }
