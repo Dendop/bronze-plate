@@ -1,8 +1,6 @@
 pipeline{
     agent any
-
     // environment{
-
     // }
     // parameters{
     // }
@@ -20,7 +18,7 @@ pipeline{
                 sh "cd jenkins-pipeline-example"
                 sh "echo 'Hello World' > exampleFile.txt || true"
             }
-        },
+        }
         stage('adding a new file'){
             steps{
                 sh "touch ~/jenkins-pipeline-example/newFile.txt || true"
